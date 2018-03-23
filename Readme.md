@@ -1,86 +1,99 @@
-![cf](http://i.imgur.com/7v5ASc8.png) Lab 3 : Word Guess Game
-=====================================
+# WordGuess
 
-## To Submit this Assignment
-- fork this repository
-- create a new branch named `lab03-`; + `<your name>` **e.g.** `lab03-amanda`
-- write your code
-- push to your repository
-- submit a pull request to this repository
-- submit a link to your PR in canvas
-- Include a Readme.md (contents described below)
+**Author**: Joshua Taylor
+**Version**: 1.0.0
 
-## Directions
+## Overview
 
-**Read ALL of the directions carefully before you begin....**
+WordGuess is a game which allows the user to guess the letters to a random
+mystery word two at a time until all of the word's letters have been revealed.
+These words are loaded from a comma-separated word bank stored as a text file
+on disk. Additionally, users are able to view this word bank's contents, add
+new words to the word bank, and remove words from the word bank. All changes
+are saved to disk and will persist across sessions.
 
-The directions below mock a scenario that an actual client may request. It is your job, as a developer, to interpret these directions and 
-create a program based on what is stated below.
+## Getting Started
 
-Josie Cat has requested that a "Word Guess Game" be built. The main idea of the game is she must guess what a mystery word is by inputting 
-either (1) letter or a sequence of letters at a time (at most, 2). The game should save all of her guesses (both correct and incorrect) throughout each session of the game,
-along with the ability to show her how many letters out of the word she has guessed correctly. 
+WordGuess targets the .NET Core 2.0 platform. The .NET Core 2.0 SDK can
+be downloaded from the following URL for Windows, Linux, and macOS:
 
-Each time a new game session starts, the mystery word chosen should come from an external text file that randomly selects one of the words listed. 
-This bank of words should be editable by Josie so that she may view, add, and delete words as she wishes. She expects the game to have a simple user interface that is easy to navigate. 
+https://www.microsoft.com/net/download/
 
-Using everything you've learned up to this point, create a word guess
-game that will meet all of the requiements described in the user story above. 
+The dotnet CLI utility would then be used to build and run the application:
 
+    cd WordGuess
+    dotnet build
+    dotnet run
 
-## Program Components
-- The program (should) contain the following
-    - Methods for each action (Home navigation, View words in the external file, add a word to the external file, Remove words from a text file, exit the game, start a new game)
-    - When playing a game, *randomly* select one of the words to output to the console for the user to guess
-    - You should have a record of the letters they have attempted so far
-    - If they guess a correct letter, display that letter in the console for them to refer back to when making guesses (i.e. C _ T S )
-    - Errors should be handled through Exception handling
-    - You may use any shortcuts or 'helper' methods in this project. Do not create external classes to accomplish this task. Stay within scope, you may use the the methods/classes listed below if desired.
-	- Once the game is completed, the user should be presented with the option to "Play again" (a new random word is generated), or "Exit" (the program terminates)
-	- the user should only be allowed to guess, **at most**, 2 letters at a time. Do not make it so that they can input the whole alphabet and get the answer. 
+Additionally, users can build, run, and perform unit testing using Visual
+Studio 2017 or greater by opening the solution file at the root of this
+repository.
 
-## Additional Resources
-1. To check if a character or a subset exists in a string, use the Contains() method. 
-	- [.Contains()](https://msdn.microsoft.com/en-us/library/dy85x1sa(v=vs.110).aspx)
-2. To ramdonly pick a number between 0 -> N, use the Random Class.
-	- [Random Class](https://msdn.microsoft.com/en-us/library/system.random(v=vs.110).aspx)
+## Example
 
+#### Home Menu ####
+![Home Menu Screenshot](/assets/homeScreenshot.JPG)
+#### Guessing Letters ####
+![Guessing Letters Screenshot](/assets/guessingScreenshot.JPG)
+#### Victory ####
+![Victory Screenshot](/assets/victoryScreenshot.JPG)
+#### Viewing the Word Bank ####
+![Viewing Words Screenshot](/assets/viewingScreenshot.JPG)
+#### Adding Words to Word Bank ####
+![Adding Words Screenshot](/assets/addingScreenshot.JPG)
+#### Removing Words to Word Bank ####
+![Removing Words Screenshot](/assets/removingScreenshot.JPG)
 
-## ReadMe
-A README is a module consumer's first -- and maybe only -- look into your creation. The consumer wants a module to fulfill their need, so you must explain exactly what need your module fills, and how effectively it does so.
-<br />
-Your job is to
-1. tell them what it is (with context)
-2. show them what it looks like in action
-3. show them how they use it
-4. tell them any other relevant details
-<br />
+## Architecture
 
-This is ***your*** job. It's up to the module creator to prove that their work is a shining gem in the sea of slipshod modules. 
-Since so many developers' eyes will find their way to your README before anything else, quality here is your public-facing measure of your work.
+WordGuess uses C# and the .NET Core 2.0 platform. Methods are provided to load
+a word bank file from disk, parse comma-separated words from that word bank,
+and to select random words from the word bank. All file I/O is handled through
+streams in the System.IO namespace.
 
-<br /> Refer to the sample-README in the class repo for an example. 
-- [Reference](https://github.com/noffle/art-of-readme)
+The gameplay UI is handled through a command line interface on the console
+provided via the System namespace.
 
-## Rubric
-- 7pts: Program meets all requirements described in Lab directions
+### Word Bank File Format
 
-	Points  | Reasoning | 
-	 ------------ | :-----------: | 
-	7       | Program runs as expected, no exceptions during execution |
-	5       | Program runs/compiles, Program contains logic/process errors|
-	4       | Program runs/compiles, but throws exceptions during execution |
-	2       | Missing tests // tests are not passing // not enough valid tests |
-	2       | Missing Readme Document // Readme Document does not meet standards |
-	0       | Program does not compile/run. Build Errors. |
-	0       | No Submission |
+Word bank files are simple text files with words separated by commas. These
+words are not case sensitive. Whitespace can be added between entries to ease
+the human readability of the file. By default, WordGuess looks for a word
+bank file at the path "..\..\..\wordbank.txt" relative to the working
+directory of the executable.
 
-- 3pts: Code meets industry standards
-	- These points are only awardable if you score at minimum a 5/7 on above criteria
+### Random Selection of Words
 
-	Points  | Reasoning | 
-	 ------------ | :-----------: | 
-	3       | Code meets Industry Standards // methods and variables namings are appropriate // Selective and iterative statements are used appropriately, Fundamentals are propertly executed // Clearly and cleanly commented |
-	2       | syntax for naming conventions are not correct (camelCasing and PascalCasing are used appropriately) // slight errors in use of fundamentals // Missing some comments |
-	1       | Inappropriate naming conventions, and/or inappropriate use of fundamentals // Code is not commented  |
-	0       | No Submission or incomplete submission |
+Word bank files are parsed using commas as separators, and each word is stored
+into elements of a string array. The parser can handle whitespaces between
+entries added to ease human readability of the file. The resultant array is
+then indexed using a random number generator.
+
+### Data Model
+
+WordGuess loads word bank files into memory before every session. These files
+are loaded into an array of strings with one word chosen at random before
+every game. Each game session tracks the letters which have already been
+guessed by the player and the chosen mystery word.
+
+### Command Line Interface (CLI)
+
+WordGuess operates on a finite state machine representing a session of play,
+viewing the word bank, adding new words to the word bank, and removing words
+from the word bank. Simple prompts for user input are read and the state is
+adjusted accordingly after validating correct input.
+
+### Game Logic
+
+WordGuess allows the user to input up to two letters at a time to guess against
+the mystery word chosen at random at the start of gameplay from the word bank.
+Each successful guess will reveal that letter as it appears in the mystery word
+with underscores representing letters which the player has not yet guessed.
+When the number of correctly guessed letters reaches the number of letters in
+the mystery word, the game determines that the player has won and presents
+a congratulatory message.
+
+## Change Log
+
+* 3.22.2018 [Joshua Taylor](mailto:taylor.joshua88@gmail.com) - Initial
+release. All tests are passing.
