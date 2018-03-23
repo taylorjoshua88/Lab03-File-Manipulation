@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordGuess", "WordGuess\WordGuess.csproj", "{37CA38E8-3FDE-463C-93BC-745B21708DC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordGuessTest", "WordGuessTest\WordGuessTest.csproj", "{A7160E0B-E699-4E23-B564-2A8BDB84E367}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37CA38E8-3FDE-463C-93BC-745B21708DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37CA38E8-3FDE-463C-93BC-745B21708DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37CA38E8-3FDE-463C-93BC-745B21708DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37CA38E8-3FDE-463C-93BC-745B21708DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7160E0B-E699-4E23-B564-2A8BDB84E367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7160E0B-E699-4E23-B564-2A8BDB84E367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7160E0B-E699-4E23-B564-2A8BDB84E367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7160E0B-E699-4E23-B564-2A8BDB84E367}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DE1E6B6-87C1-4B3A-9038-C262183E4B24}
+	EndGlobalSection
+EndGlobal
