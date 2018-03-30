@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using System.IO;
 using static WordGuess.Program;
 
 namespace WordGuessTest
@@ -34,6 +35,40 @@ namespace WordGuessTest
             string expectedOutput)
         {
             Assert.Equal(expectedOutput, CreatePartialWord(mysteryWord, guessedLetters));
+        }
+
+        [Fact]
+        public void CanLoadWordbankText()
+        {
+            const string wordbankPath = @"..\..\..\..\WordGuess\wordbank.txt";
+
+            string expectedText = File.ReadAllText(wordbankPath);
+            string actualText = LoadWordbankText(wordbankPath);
+
+            Assert.Equal(expectedText, actualText);
+        }
+
+        [Fact]
+        public void CanLoadRandomWordFromFile()
+        {
+            const string wordbankPath = @"..\..\..\..\WordGuess\wordbank.txt";
+
+            // Create two Random objects with matching seeds to ensure
+            // result consistency
+            Random expectedRandom = new Random(500);
+            Random actualRandom = new Random(500);
+
+            // Manually pick a "random" word from a parsed set of words
+            string[] expectedWordbank = ParseWordbankText(LoadWordbankText(wordbankPath));
+            string expectedWord = 
+                expectedWordbank[expectedRandom.Next(0, expectedWordbank.Length)];
+
+            // Use the LoadRandomWordFromFile method to pick a random word using another
+            // random number generated with the same seed as above
+            string actualWord = LoadRandomWordFromFile(wordbankPath, actualRandom);
+
+            // Assert
+            Assert.Equal(expectedWord, actualWord);
         }
     }
 }

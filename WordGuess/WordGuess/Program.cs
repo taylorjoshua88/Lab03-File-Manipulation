@@ -126,17 +126,20 @@ namespace WordGuess
                     return false;
                 }
 
-                if (userInput.Length > 0 && 
-                    Regex.Matches(guessedLetters, $"[{userInput}]").Count > 0)
+                if (userInput.Length > 0)
                 {
-                    Console.WriteLine("You have already guessed one of those letters!");
-                    Console.WriteLine("Please press any key to try again...");
-                    Console.ReadKey(true);
-                    continue;
+                    if (Regex.Matches(guessedLetters, $"[{userInput}]").Count > 0)
+                    {
+                        Console.WriteLine("You have already guessed one of those letters!");
+                        Console.WriteLine("Please press any key to try again...");
+                        Console.ReadKey(true);
+                    }
+                    else
+                    {
+                        correctGuesses += CheckGuesses(mysteryWord, userInput);
+                        guessedLetters += userInput;
+                    }
                 }
-
-                correctGuesses += CheckGuesses(mysteryWord, userInput);
-                guessedLetters += userInput;
             }
 
             Console.WriteLine($"Congratulations! You've guessed {mysteryWord}!");
@@ -305,11 +308,18 @@ namespace WordGuess
         /// Loads a random word from a comma-separated wordbank file
         /// </summary>
         /// <param name="path">Path to the wordbank file</param>
+        /// <param name="random">Can optionally use a specific Random object. If
+        /// random is null then the default, time-based seed Random constructor is used
+        /// </param>
         /// <returns>A random word as a string</returns>
-        public static string LoadRandomWordFromFile(string path)
+        public static string LoadRandomWordFromFile(string path, Random random = null)
         {
-            Random random = new Random();
-
+            // If the user didn't provide their own Random object
+            if (random is null)
+            {
+                random = new Random();
+            }
+            
             // Pick a random word from the wordbank array and return it
             string[] wordbank = ParseWordbankText(LoadWordbankText(path));
             return wordbank[random.Next(0, wordbank.Length)];

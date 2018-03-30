@@ -1,7 +1,7 @@
 # WordGuess
 
 **Author**: Joshua Taylor
-**Version**: 1.0.0
+**Version**: 1.0.1
 
 ## Overview
 
@@ -95,5 +95,8 @@ a congratulatory message.
 
 ## Change Log
 
+* 3.30.2018 [Joshua Taylor](mailto:taylor.joshua88@gmail.com) - Fixed user
+input problem after choosing to start a new game and immediately pressing
+the enter key. Added two new unit tests.
 * 3.22.2018 [Joshua Taylor](mailto:taylor.joshua88@gmail.com) - Initial
 release. All tests are passing.
